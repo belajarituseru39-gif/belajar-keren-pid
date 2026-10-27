@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belajar KEREN Game PID - Portal Game Edukasi Interaktif | Abdul Rahmat, S.Pd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--red:#D7263D;--red-d:#9E1428;--org:#FF7A1A;--yel:#FFC21A;--cream:#FFF6DC;--bg:#FFF6DC;--card:#fff;--ink:#2A0F0A;--mute:#7A5448;--line:#2A0F0A}
+:root[data-theme=dark]{--bg:#1E0B08;--card:#2E130E;--ink:#FFF1D0;--mute:#E2B89A;--line:#FFC21A;--cream:#2E130E}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+h1,h2,h3,.disp{font-family:'Baloo 2',sans-serif;line-height:1.1}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:14px;border:3px solid var(--line);font-weight:800;background:var(--yel);color:#2A0F0A;box-shadow:4px 4px 0 var(--line);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.btn.red{background:var(--red);color:#fff}.btn.org{background:var(--org);color:#2A0F0A}.btn.ghost{background:var(--card);color:var(--ink)}
+.ib{width:42px;height:42px;padding:0;border-radius:12px}
+/* nav */
+header{position:sticky;top:0;z-index:40;background:var(--red);border-bottom:4px solid var(--yel)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Baloo 2';font-weight:800;font-size:1.3rem}
+.logo{width:42px;height:42px;border-radius:12px;background:var(--yel);color:var(--red);display:grid;place-items:center;border:3px solid #2A0F0A;transform:rotate(-6deg)}
+.links{display:flex;gap:22px;font-weight:800;color:#fff}.links a:hover{color:var(--yel)}
+.tools{display:flex;gap:8px}
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--red) 0%,#E8481F 55%,var(--org) 100%);color:#fff;padding:56px 0 90px}
+.hero::before{content:"";position:absolute;right:-220px;top:-220px;width:620px;height:620px;border-radius:50%;background:repeating-conic-gradient(rgba(255,194,26,.35) 0 10deg,transparent 10deg 20deg);animation:spin 60s linear infinite}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--bg);clip-path:polygon(0 100%,0 60%,8% 30%,16% 60%,24% 20%,32% 60%,40% 30%,48% 60%,56% 20%,64% 60%,72% 30%,80% 60%,88% 20%,96% 60%,100% 40%,100% 100%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hgrid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+.tag{display:inline-flex;gap:8px;align-items:center;background:var(--yel);color:#2A0F0A;font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:99px;border:3px solid #2A0F0A;margin-bottom:18px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;text-shadow:4px 4px 0 #2A0F0A;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--yel)}
+.hero p.lead{font-size:1.1rem;max-width:560px;margin-bottom:22px;font-weight:600}
+.by{display:flex;align-items:center;gap:12px;background:#fff;color:#2A0F0A;border:3px solid #2A0F0A;border-radius:16px;padding:10px 16px;width:fit-content;box-shadow:4px 4px 0 #2A0F0A;margin-bottom:24px}
+.by img{width:46px;height:46px;border-radius:12px;object-fit:cover;object-position:top;border:3px solid var(--org)}
+.by small{display:block;color:#7A5448;font-weight:700;font-size:.75rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.panel{background:var(--cream);color:#2A0F0A;border:4px solid #2A0F0A;border-radius:24px;padding:20px;box-shadow:8px 8px 0 #2A0F0A;transform:rotate(1.5deg)}
+.panel h3{font-size:1.2rem;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.panel h3 b{background:var(--red);color:#fff;border-radius:99px;padding:2px 12px;font-size:.85rem}
+.crow{display:flex;gap:12px;align-items:center;padding:10px;border-radius:14px;border:2px solid #2A0F0A;background:#fff;margin-bottom:10px;cursor:pointer;transition:transform .15s,background .15s;width:100%;text-align:left}
+.crow:hover{transform:translateX(6px);background:var(--yel)}
+.crow i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none;border:2px solid #2A0F0A}
+.crow strong{display:block;font-family:'Baloo 2';font-size:1.02rem;line-height:1.2}
+.crow span{font-size:.78rem;color:#7A5448;font-weight:700}
+.crow em{margin-left:auto;font-style:normal;font-weight:800;font-size:.8rem;background:var(--org);padding:2px 10px;border-radius:99px;border:2px solid #2A0F0A;white-space:nowrap}
+/* catalog */
+section{padding:64px 0}
+.sh{text-align:center;max-width:680px;margin:0 auto 28px}
+.sh h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;margin-bottom:8px}
+.sh p{color:var(--mute);font-weight:600}
+.bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:26px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 4px 8px;max-width:100%}
+.chip{flex:none;padding:8px 14px;border-radius:99px;border:3px solid var(--line);background:var(--card);font-weight:800;font-size:.85rem;display:flex;gap:6px;align-items:center}
+.chip.on{background:var(--red);color:#fff;box-shadow:3px 3px 0 var(--line)}
+.search{position:relative;width:min(100%,320px)}
+.search input{width:100%;padding:11px 14px 11px 40px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700}
+.search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:0 20px 18px;box-shadow:6px 6px 0 var(--ac);display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s,box-shadow .2s;overflow:hidden}
+.card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ac)}
+.card .top{height:12px;margin:0 -20px 16px;background:repeating-linear-gradient(135deg,var(--ac) 0 12px,var(--ac2) 12px 24px)}
+.ch{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
+.ci{width:50px;height:50px;border-radius:14px;background:var(--ac);color:#2A0F0A;display:grid;place-items:center;font-size:1.3rem;border:3px solid var(--line);flex:none}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 10px;border-radius:99px;background:var(--ac2);color:#2A0F0A;border:2px solid #2A0F0A}
+.meta{font-size:.78rem;font-weight:800;color:var(--mute);margin-top:4px}
+.card h3{font-size:1.28rem;font-weight:700;margin-bottom:6px}
+.card p{color:var(--mute);font-weight:600;font-size:.93rem;margin-bottom:16px}
+.act{display:flex;gap:8px;padding-top:14px;border-top:2px dashed var(--mute)}
+.act .btn{flex:1;padding:10px;font-size:.9rem}.act .ib{flex:none;box-shadow:3px 3px 0 var(--line)}
+.fav.on{background:var(--red);color:#fff}
+.empty{display:none;text-align:center;padding:48px 16px;border:3px dashed var(--line);border-radius:22px}
+/* guide */
+.guide{background:var(--yel);border-block:4px solid #2A0F0A;color:#2A0F0A}
+.guide .sh p{color:#5B2A14}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.g3 div{background:#fff;border:3px solid #2A0F0A;border-radius:20px;padding:22px;box-shadow:6px 6px 0 var(--red)}
+.g3 i{width:48px;height:48px;border-radius:14px;background:var(--org);display:grid;place-items:center;font-size:1.2rem;border:3px solid #2A0F0A;margin-bottom:12px}
+.g3 h3{font-size:1.2rem;margin-bottom:6px}.g3 p{font-weight:600;font-size:.93rem;color:#5B2A14}
+/* creator */
+.cr{background:var(--red-d);color:#fff}
+.cbox{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:center;background:var(--red);border:4px solid #2A0F0A;border-radius:28px;padding:32px;box-shadow:10px 10px 0 var(--yel)}
+.cbox img{width:100%;aspect-ratio:1;object-fit:cover;object-position:top;border-radius:24px;border:5px solid var(--yel)}
+.cbox h2{font-size:1.7rem;margin:8px 0 12px}
+.cinfo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:18px 0}
+.cinfo div{background:rgba(0,0,0,.25);border-radius:14px;padding:12px 14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cinfo small{display:block;font-weight:600;color:var(--yel)}
+footer{background:#2A0F0A;color:#FFE9B0;padding:24px 0;font-weight:600;font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+/* modal + toast */
+#modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(42,15,10,.75)}
+#modal.show{display:flex}
+.mbox{background:var(--card);border:4px solid var(--line);border-radius:24px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:26px;box-shadow:8px 8px 0 var(--ac,var(--red));animation:pop .2s}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.mbox ul{list-style:none;padding:0;margin:8px 0 20px;display:grid;gap:8px;font-weight:600;font-size:.92rem}
+.mbox li{display:flex;gap:8px;align-items:flex-start}.mbox li i{color:var(--org);margin-top:5px;font-size:.8rem}
+.mis{background:var(--cream);border:2px dashed var(--org);border-radius:14px;padding:14px;margin:14px 0;font-weight:700}
+#toasts{position:fixed;bottom:18px;right:18px;z-index:70;display:grid;gap:8px}
+.toast{background:#2A0F0A;color:var(--yel);border:3px solid var(--yel);padding:10px 16px;border-radius:14px;font-weight:800;max-width:320px;animation:pop .2s}
+.menu{display:none}.nofa i{font-style:normal}
+@media(max-width:860px){.menu{display:inline-flex}.links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:14px;background:var(--red);padding:18px 20px;border-bottom:4px solid var(--yel)}.hgrid,.cbox{grid-template-columns:1fr}.links{display:none}.panel{transform:none}.cbox img{max-width:200px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="toasts"></div>
+
+<div id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="mbox" id="mbox">
+    <div style="display:flex;justify-content:space-between;gap:12px">
+      <div class="ci" id="mIcon"><i></i></div>
+      <button class="btn ghost ib" onclick="closeModal()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="margin-top:12px"><span class="badge" id="mCat"></span> <span class="meta" id="mLv"></span></div>
+    <h3 id="mTitle" style="font-size:1.7rem;margin-top:6px"></h3>
+    <div class="mis"><i class="fa-solid fa-scroll"></i> Misi: <span id="mDesc"></span></div>
+    <b class="disp">Keunggulan & kompetensi yang dilatih</b>
+    <ul id="mHl"></ul>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a id="mPlay" class="btn red" style="flex:1" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-play"></i> Mainkan Sekarang</a>
+      <button id="mCopy" class="btn ghost"><i class="fa-regular fa-copy"></i> Salin Link</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#beranda" class="brand"><span class="logo"><i class="fa-solid fa-gamepad"></i></span>Belajar KEREN Game PID</a>
+    <nav class="links" id="links" onclick="this.classList.remove('open')"><a href="#beranda">Beranda</a><a href="#arena-game">15 Arena Game</a><a href="#fitur-pid">Cara Main</a><a href="#kreator">Inovator</a></nav>
+    <div class="tools">
+      <button class="btn org ib" onclick="pickRandom()" title="Pilih game acak"><i class="fa-solid fa-dice"></i></button>
+      <button class="btn ib" onclick="toggleFS()" title="Layar penuh (PID)" aria-label="Layar penuh"><i id="fsI" class="fa-solid fa-expand"></i></button>
+      <button class="btn ib menu" onclick="document.getElementById('links').classList.toggle('open')" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="btn ghost ib" onclick="toggleTheme()" title="Mode terang / gelap" aria-label="Ganti tema"><i id="thI" class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+</header>
+
+<section id="beranda" class="hero" style="padding-bottom:90px">
+  <div class="wrap hgrid">
+    <div>
+      <span class="tag"><i class="fa-solid fa-tv"></i> Siap untuk Papan Interaktif Digital & perangkat siswa</span>
+      <h1>Main Seru, Belajar <em>KEREN</em> di Kelas!</h1>
+      <p class="lead">15 game edukasi interaktif untuk literasi & numerasi, 7 Kebiasaan Anak Indonesia Hebat, 8 Dimensi Profil Lulusan, Budaya Sekolah Aman Nyaman (Permendikdasmen No. 06 Tahun 2026), anti korupsi, hingga pendidikan agama.</p>
+      <div class="by">
+        <img src="https://i.imgur.com/YbvvB0o.jpeg" alt="Abdul Rahmat, S.Pd" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=AV">
+        <div><small>Inovasi pembelajaran oleh</small><b>Abdul Rahmat, S.Pd</b> · SDN 011 Balikpapan Tengah</div>
+      </div>
+      <div class="cta">
+        <a href="#arena-game" class="btn"><i class="fa-solid fa-gamepad"></i> Pilih & Mainkan Game</a>
+        <button class="btn ghost" onclick="pickRandom()"><i class="fa-solid fa-wand-magic-sparkles"></i> Pilihkan Game Acak</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Kategori Game <b>15 Misi</b></h3>
+      <button class="crow" onclick="goCat('litnum')"><i style="background:var(--org)" class="fa-solid fa-calculator"></i><div><strong>Literasi & Numerasi</strong><span>Tera Mera, Liga Pahlawan, BEKESAH, Zombie Math</span></div><em>4</em></button>
+      <button class="crow" onclick="goCat('karakter')"><i style="background:var(--red)" class="fa-solid fa-shield-heart"></i><div><strong>7 KAIH, DPL & Karakter</strong><span>BUS AMAN, BINEKA, HAKI, DPL Game</span></div><em>7</em></button>
+      <button class="crow" onclick="goCat('strategi')"><i style="background:#E8481F" class="fa-solid fa-dragon"></i><div><strong>Strategi & Aksi</strong><span>Liga Pahlawan & BERDAZI</span></div><em>2</em></button>
+      <button class="crow" onclick="goCat('religi')"><i style="background:#C98A00" class="fa-solid fa-mosque"></i><div><strong>Religi & Amal</strong><span>Petualangan Amal & Jejak Emas Ramadan</span></div><em>2</em></button>
+    </div>
+  </div>
+</section>
+
+<section id="arena-game">
+  <div class="wrap">
+    <div class="sh"><h2>Pilih Misi Permainanmu Hari Ini!</h2><p>Klik <b>Mainkan Sekarang</b> pada kartu game untuk langsung mulai petualangan belajar bersama teman sekelas.</p></div>
+    <div class="bar">
+      <div class="chips" id="chips"></div>
+      <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Cari Tera Mera, BUS AMAN, Zombie..." oninput="searchQ=this.value;render()" aria-label="Cari game"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty"><h3 class="disp" style="font-size:1.4rem">Game tidak ditemukan</h3><p id="emptyMsg" style="margin:8px 0 16px;color:var(--mute);font-weight:600"></p><button class="btn red" onclick="resetAll()">Tampilkan semua game</button></div>
+  </div>
+</section>
+
+<section id="fitur-pid" class="guide">
+  <div class="wrap">
+    <div class="sh"><h2>Cara Seru Main Game PID di Kelas</h2><p>Bisa dimainkan di layar sentuh besar di depan kelas maupun di perangkat masing-masing siswa.</p></div>
+    <div class="g3">
+      <div><i class="fa-solid fa-chalkboard-user"></i><h3>1. Layar Sentuh Kelas</h3><p>Tampilkan halaman ini di smartboard atau proyektor. Tekan tombol layar penuh, lalu ajak siswa maju bergantian atau adu cepat menjawab.</p></div>
+      <div><i class="fa-solid fa-users-rays"></i><h3>2. Kolaborasi & Turnamen</h3><p>Bentuk kelompok, lalu mainkan BINEKA, Liga Pahlawan, atau Zombie Math untuk melatih kerja sama dan kecepatan berpikir.</p></div>
+      <div><i class="fa-solid fa-mobile-screen-button"></i><h3>3. Belajar dari Rumah</h3><p>Salin tautan game ke grup WhatsApp kelas atau orang tua. Siswa bisa berlatih lagi lewat Chromebook, laptop, tablet, atau ponsel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="kreator" class="cr">
+  <div class="wrap">
+    <div class="cbox">
+      <img src="https://i.imgur.com/YbvvB0o.jpeg" alt="Foto Abdul Rahmat, S.Pd" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=AV">
+      <div>
+        <span class="tag" style="margin:0"><i class="fa-solid fa-gamepad"></i> Kreator & Pengembang Game Edukasi</span>
+        <h2>Abdul Rahmat, S.Pd</h2>
+        <p style="font-weight:700;font-size:1.05rem">"Menghadirkan pengalaman belajar yang seru, interaktif, dan membentuk karakter Anak Indonesia Hebat."</p>
+        <p style="margin-top:10px;font-weight:600;opacity:.92">Lewat 15 game tematik ini, siswa mengasah literasi dan numerasi sekaligus menginternalisasi 7 KAIH, 8 Dimensi Profil Lulusan, nilai anti korupsi, keberagaman, keagamaan, serta budaya sekolah aman dan nyaman.</p>
+        <div class="cinfo">
+          <div><span><small>Satuan Pendidikan</small>SD Negeri 011 Balikpapan Tengah</span></div>
+          <div><span><small>Kontak / WhatsApp</small>081351767574</span><button class="btn ib" style="width:auto;padding:0 12px;height:36px;box-shadow:none" onclick="copyText('081351767574','Nomor telepon berhasil disalin!')">Salin</button></div>
+        </div>
+        <div class="cta">
+          <a class="btn" href="https://wa.me/6281351767574?text=Halo%20Bapak%20Abdul%20Rahmat%2C%20saya%20sangat%20tertarik%20dengan%20portal%20Belajar%20KEREN%20Game%20PID." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hubungi via WhatsApp</a>
+          <button class="btn ghost" onclick="copyAll()"><i class="fa-solid fa-share-nodes"></i> Salin Semua 15 Link Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span><b>Belajar KEREN Game PID</b> · Karya Abdul Rahmat, S.Pd · SD Negeri 011 Balikpapan Tengah (Telp. 081351767574)</span><span>&copy; <span id="yr"></span> Belajar Itu Seru!</span></div></footer>
+
+<script>
+const G=[
+{id:'tera-mera-litnum',n:'01',t:'Tera Mera Kitchen Quest - Versi Literasi Numerasi',c:'litnum',cl:'Literasi & Numerasi',lv:'SD / MI',u:'https://belajarituseru39-gif.github.io/tera_mera_quest/',ic:'fa-utensils',d:'Yuk selesaikan misi pesanan para pelanggan! Jawab tantangan literasi dan numerasi untuk mendapatkan energi.',h:['Simulasi manajemen dapur interaktif yang memicu antusiasme siswa','Tantangan soal literasi dan numerasi kontekstual untuk menambah energi','Melatih ketelitian, manajemen waktu, dan pemecahan masalah']},
+{id:'tera-mera-7kaih',n:'02',t:'Tera Mera Kitchen Quest - Versi 7 KAIH',c:'karakter',cl:'7 KAIH & Karakter',lv:'SD / SMP',u:'https://belajarituseru39-gif.github.io/tera_mera_7kaih/',ic:'fa-kitchen-set',d:'Yuk selesaikan misi pesanan para pelanggan! Jawab tantangan 7 Kebiasaan Anak Indonesia Hebat untuk mendapatkan energi.',h:['Menginternalisasi 7 Kebiasaan Anak Indonesia Hebat (7 KAIH) sambil bermain','Menyelesaikan pesanan pelanggan dengan energi dari jawaban yang tepat','Membentuk karakter positif anak melalui skenario keseharian']},
+{id:'liga-pahlawan',n:'03',t:'Liga Pahlawan',c:'strategi',cl:'Strategi & Aksi',lv:'SD s.d. SMP',u:'https://belajarituseru39-gif.github.io/ligapahlawan01/',ic:'fa-shield-halved',d:'Uji kecerdasanmu, susun tim pahlawan terkuat dan kalahkan monster!',h:['Pertarungan taktis menyusun formasi tim pahlawan terbaik','Serangan pahlawan diperkuat oleh ketepatan menjawab tantangan pengetahuan','Sangat seru dimainkan bersama satu kelas di layar PID']},
+{id:'liga-pahlawan-litnum',n:'04',t:'Liga Pahlawan - Versi Literasi dan Numerasi (SD s.d. SMA)',c:'litnum',cl:'Literasi & Numerasi',lv:'SD s.d. SMA',u:'https://belajarituseru39-gif.github.io/ligapahlawan_litnum/',ic:'fa-wand-sparkles',d:'Uji kemampuan literasi dan numerasi-mu, susun tim pahlawan terkuat dan kalahkan monster!',h:['Tersedia untuk lintas jenjang mulai dari SD, SMP, hingga SMA','Menguji penalaran literasi membaca dan numerasi melalui aksi RPG','Meningkatkan motivasi siswa dalam berlatih soal setara ANBK/TKA']},
+{id:'bineka-game',n:'05',t:'BINEKA Game',c:'karakter',cl:'Kebinekaan & Karakter',lv:'SD / SMP / Umum',u:'https://belajarituseru39-gif.github.io/binekagame01/',ic:'fa-earth-asia',d:'Ayo pelajari keberagaman, adu cepat dapat poin bersama sahabat!',h:['Mengenal kekayaan budaya, suku, dan keberagaman Indonesia','Mode adu cepat poin yang memacu semangat kompetitif sehat antar sahabat','Menumbuhkan rasa cinta tanah air dan toleransi sejak dini']},
+{id:'manuntung-7kaih',n:'06',t:'Manuntung 7 KAIH Game',c:'karakter',cl:'7 KAIH & Karakter',lv:'SD / SMP',u:'https://belajarituseru39-gif.github.io/manuntung7kaih/',ic:'fa-compass',d:'Ayo pahami 7 Kebiasaan Anak Indonesia Hebat dengan berpetualang seru bersama sahabat!',h:['Mengangkat kearifan lokal Balikpapan (Manuntung) dalam petualangan edukatif','Memahami bangun pagi, beribadah, berolahraga, makan sehat, gemar belajar, bermasyarakat, dan tidur cepat','Bisa dimainkan secara kolaboratif bersama teman sekelas']},
+{id:'haki-anti-korupsi',n:'07',t:'HAKI (Hero Anti Korupsi)',c:'karakter',cl:'Pendidikan Anti Korupsi',lv:'SD / SMP / SMA',u:'https://belajarituseru39-gif.github.io/haki02/',ic:'fa-scale-balanced',d:'Ayo pahami 9 nilai pendidikan anti korupsi bersama sahabatmu! Selesaikan misi menyelamatkan dunia ini!',h:['Menanamkan 9 Nilai Integritas / Anti Korupsi (Jujur, Peduli, Mandiri, Disiplin, Tanggung Jawab, Kerja Keras, Sederhana, Berani, Adil)','Alur cerita pahlawan penyelamat dunia yang heroik dan berkesan','Membentuk karakter pelajar berintegritas tinggi']},
+{id:'bekesah',n:'08',t:'BEKESAH',c:'litnum',cl:'Literasi & Numerasi',lv:'SD / SMP',u:'https://belajarituseru39-gif.github.io/bekesah2/',ic:'fa-comments',d:'Yuk mulai bincang numerasi di kelas bersama sahabat!',h:['Memantik diskusi dan bincang numerasi yang hangat di dalam kelas','Mengubah matematika menjadi obrolan seru yang dekat dengan kehidupan sehari-hari','Melatih komunikasi matematis dan bernalar kritis bersama teman']},
+{id:'bus-aman-sd',n:'09',t:'BUS AMAN - Versi SD',c:'karakter',cl:'Budaya Sekolah Aman',lv:'Khusus Jenjang SD',u:'https://belajarituseru39-gif.github.io/busaman_sd/',ic:'fa-bus',d:'Ayo belajar membangun budaya sekolah aman dan nyaman sesuai Permendikdasmen Nomor 06 Tahun 2026.',h:['Materi disusun khusus sesuai tingkat perkembangan peserta didik Sekolah Dasar (SD)','Selaras dengan regulasi terbaru Permendikdasmen Nomor 06 Tahun 2026','Mengajarkan pencegahan perundungan, saling menghargai, dan lingkungan sekolah ramah anak']},
+{id:'bus-aman-umum',n:'10',t:'BUS AMAN – Jenjang SD, SMP, SMA, Umum',c:'karakter',cl:'Budaya Sekolah Aman',lv:'SD, SMP, SMA & Umum',u:'https://belajarituseru39-gif.github.io/busaman/',ic:'fa-bus-simple',d:'Ayo belajar membangun budaya sekolah aman dan nyaman sesuai Permendikdasmen Nomor 06 Tahun 2026.',h:['Mencakup pilihan jenjang lengkap: SD, SMP, SMA, hingga Umum/Warga Sekolah','Sosialisasi interaktif Permendikdasmen Nomor 06 Tahun 2026 tentang Budaya Sekolah Aman dan Nyaman','Cocok untuk kegiatan MPLS, sosialisasi sekolah, maupun pembelajaran di kelas']},
+{id:'dpl-game',n:'11',t:'DPL Game',c:'karakter',cl:'8 Dimensi Profil Lulusan',lv:'SD / SMP / SMA',u:'https://belajarituseru39-gif.github.io/dplgame/',ic:'fa-user-graduate',d:'Ayo pahami 8 Dimensi Profil Lulusan dengan bermain bersama sahabat!',h:['Mengupas tuntas 8 Dimensi Profil Lulusan (Keimanan, Kewargaan, Penalaran Kritis, Kreativitas, Kolaborasi, Kemandirian, Kesehatan, Komunikasi)','Dirancang untuk dimainkan secara interaktif bersama sahabat di kelas','Memperkuat pemahaman Pembelajaran Mendalam (Deep Learning)']},
+{id:'berdazi',n:'12',t:'BERDAZI',c:'strategi',cl:'Strategi & Aksi',lv:'SD / SMP / SMA',u:'https://belajarituseru39-gif.github.io/berdazi01/',ic:'fa-fort-awesome',d:'Uji kecerdasanmu, susun pelindung kota terkuat, bertahan dari serangan zombie!',h:['Game bergenre Tower Defense / pertahanan kota yang menegangkan dan seru','Jawab pertanyaan dengan cerdas untuk memperkuat benteng pelindung kota','Melatih pengambilan keputusan cepat dan ketepatan menjawab soal']},
+{id:'petualangan-amal',n:'13',t:'Petualangan Amal',c:'religi',cl:'Religi & Akhlak Mulia',lv:'SD / SMP',u:'https://belajarituseru39-gif.github.io/petualanganamal/',ic:'fa-hand-holding-heart',d:'Mari berpetualang, kumpulkan bekal ilmu agama dan tebarkan kebaikan melalui misi seru!',h:['Menggabungkan petualangan seru dengan pengumpulan bekal ilmu agama','Misi menebarkan kebaikan dan akhlak mulia dalam kehidupan sehari-hari','Sangat cocok untuk pembelajaran PAI maupun kegiatan pembiasaan karakter']},
+{id:'jejak-emas-ramadan',n:'14',t:'Jejak Emas Ramadan',c:'religi',cl:'Religi & Akhlak Mulia',lv:'SD / SMP / Umum',u:'https://belajarituseru39-gif.github.io/jejakemas-02/',ic:'fa-moon',d:'Uji pengetahuan agama Islam bersama sahabatmu dan bantu masyarakat membangun fasilitas!',h:['Kuis interaktif wawasan keislaman yang dimainkan bersama sahabat','Misi mulia membantu masyarakat membangun fasilitas dari poin keberhasilan','Menyenangkan untuk Pesantren Kilat, kegiatan Ramadan, maupun kelas reguler']},
+{id:'zombie-math',n:'15',t:'Zombie Math',c:'litnum',cl:'Literasi & Numerasi',lv:'SD / SMP',u:'https://belajarituseru39-gif.github.io/zombiemath/',ic:'fa-bolt',d:'Ayo adu kecepatan operasi hitung bilangan bersama sahabatmu!',h:['Melatih ketangkasan mental aritmetika dan kecepatan operasi hitung bilangan','Mode kompetitif bersama sahabat yang membuat belajar berhitung jadi tidak membosankan','Sangat efektif untuk pemanasan (ice breaking) numerasi di awal jam pelajaran']}
+];
+// Aksen merah / jingga / kuning bergilir per kartu
+
+const AV="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23D7263D'/%3E%3Ctext x='50' y='65' font-size='42' font-weight='800' text-anchor='middle' fill='%23FFC21A' font-family='sans-serif'%3EAR%3C/text%3E%3C/svg%3E";
+const EM={'gamepad':'🎮','tv':'📺','wand-magic-sparkles':'✨','calculator':'🧮','shield-heart':'🛡️','dragon':'🐉','mosque':'🕌','magnifying-glass':'🔍','chalkboard-user':'👩‍🏫','users-rays':'👥','mobile-screen-button':'📱','whatsapp':'💬','share-nodes':'🔗','play':'▶️','copy':'📋','circle-info':'ℹ️','heart':'❤️','xmark':'✖️','dice':'🎲','expand':'⛶','compress':'⛶','moon':'🌙','sun':'☀️','scroll':'📜','circle-check':'✅','border-all':'▦','utensils':'🍴','kitchen-set':'🍳','shield-halved':'🛡️','earth-asia':'🌏','compass':'🧭','scale-balanced':'⚖️','comments':'💬','bus':'🚌','bus-simple':'🚌','user-graduate':'🎓','fort-awesome':'🏰','hand-holding-heart':'🤲','bolt':'⚡','bars':'☰'};
+let FA_OK=true;
+// Jika Font Awesome gagal dimuat (offline / diblokir), ikon diganti emoji agar tetap tampil
+function faFix(){
+  if(FA_OK)return;
+  document.documentElement.classList.add('nofa');
+  document.querySelectorAll('i[class*="fa-"]').forEach(el=>{
+    const k=[...el.classList].map(c=>c.replace('fa-','')).find(c=>EM[c]);
+    el.textContent=(k==='heart'&&el.classList.contains('fa-regular'))?'🤍':(EM[k]||'•');
+  });
+}
+window.addEventListener('load',()=>{
+  (document.fonts?document.fonts.load('900 1em "Font Awesome 6 Free"').then(f=>f.length>0):Promise.resolve(true))
+   .then(ok=>{FA_OK=ok}).catch(()=>{FA_OK=false}).finally(faFix);
+});
+const AC=[['#D7263D','#FFC21A'],['#FF7A1A','#FFC21A'],['#FFC21A','#FF7A1A']];
+const CATS=[['semua','fa-border-all','Semua (15)'],['litnum','fa-calculator','Literasi & Numerasi (4)'],['karakter','fa-shield-heart','7 KAIH, DPL & Karakter (7)'],['strategi','fa-dragon','Strategi & Aksi (2)'],['religi','fa-mosque','Religi & Amal (2)'],['favorit','fa-heart','Favorit']];
+let cat='semua',searchQ='',favs=[];
+try{favs=JSON.parse(localStorage.getItem('bk_favs')||'[]')}catch(e){}
+const $=id=>document.getElementById(id);
+
+function chips(){
+  $('chips').innerHTML=CATS.map(([k,i,l])=>`<button class="chip ${cat===k?'on':''}" onclick="setCat('${k}')"><i class="fa-solid ${i}"></i>${l}${k==='favorit'?' ('+favs.length+')':''}</button>`).join('');
+}
+function render(){
+  chips();
+  const q=searchQ.trim().toLowerCase();
+  const list=G.filter(g=>(cat==='semua'||(cat==='favorit'?favs.includes(g.id):g.c===cat))&&(!q||[g.t,g.d,g.cl,g.lv].some(s=>s.toLowerCase().includes(q))));
+  $('empty').style.display=list.length?'none':'block';
+  $('emptyMsg').textContent=cat==='favorit'&&!favs.length?'Belum ada favorit. Klik ikon hati pada kartu game untuk menandainya.':'Coba kata kunci lain atau tampilkan semua game.';
+  $('grid').innerHTML=list.map(g=>{
+    const a=AC[G.indexOf(g)%3],f=favs.includes(g.id);
+    return `<article class="card" style="--ac:${a[0]};--ac2:${a[1]}"><div><div class="top"></div>
+    <div class="ch"><div style="display:flex;gap:12px"><div class="ci"><i class="fa-solid ${g.ic}"></i></div><div><span class="badge">${g.cl}</span><div class="meta">Game #${g.n} • ${g.lv}</div></div></div>
+    <button class="btn ghost ib fav ${f?'on':''}" onclick="toggleFav('${g.id}')" aria-label="Favorit" style="box-shadow:3px 3px 0 var(--line)"><i class="${f?'fa-solid':'fa-regular'} fa-heart"></i></button></div>
+    <h3>${g.t}</h3><p>${g.d}</p></div>
+    <div class="act"><a class="btn red" href="${g.u}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-play"></i> Mainkan Sekarang</a>
+    <button class="btn ghost ib" onclick="copyText('${g.u}','Link game berhasil disalin!')" title="Salin link" aria-label="Salin link"><i class="fa-regular fa-copy"></i></button>
+    <button class="btn ghost ib" onclick="openModal('${g.id}')" title="Detail misi" aria-label="Detail"><i class="fa-solid fa-circle-info"></i></button></div></article>`}).join('');
+  faFix();
+}
+function setCat(k){cat=k;render()}
+function goCat(k){setCat(k);$('arena-game').scrollIntoView({behavior:'smooth'})}
+function resetAll(){searchQ='';$('q').value='';setCat('semua')}
+function toggleFav(id){
+  const i=favs.indexOf(id);
+  if(i>-1){favs.splice(i,1);toast('Dihapus dari favorit')}else{favs.push(id);toast('Ditambahkan ke favorit kelas!')}
+  try{localStorage.setItem('bk_favs',JSON.stringify(favs))}catch(e){}
+  render();
+}
+function pickRandom(){const g=G[Math.floor(Math.random()*G.length)];openModal(g.id);toast('Game acak: '+g.t)}
+function openModal(id){
+  const g=G.find(x=>x.id===id),a=AC[G.indexOf(g)%3];
+  $('mbox').style.setProperty('--ac',a[0]);
+  $('mIcon').style.background=a[0];$('mIcon').firstElementChild.className='fa-solid '+g.ic;
+  $('mCat').textContent=g.cl;$('mLv').textContent=g.lv;$('mTitle').textContent=g.t;$('mDesc').textContent=g.d;
+  $('mHl').innerHTML=g.h.map(h=>`<li><i class="fa-solid fa-circle-check"></i><span>${h}</span></li>`).join('');
+  $('mPlay').href=g.u;$('mCopy').onclick=()=>copyText(g.u,'Link game berhasil disalin!');
+  $('modal').classList.add('show');faFix();
+}
+function closeModal(){$('modal').classList.remove('show')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function toggleFS(){
+  if(!document.fullscreenElement){document.documentElement.requestFullscreen().then(()=>{$('fsI').className='fa-solid fa-compress';toast('Mode layar penuh aktif!');faFix()}).catch(()=>toast('Layar penuh tidak diizinkan browser ini.'))}
+  else{document.exitFullscreen();$('fsI').className='fa-solid fa-expand'}
+}
+function copyText(t,m){
+  const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;left:-9999px';document.body.appendChild(a);a.select();
+  try{document.execCommand('copy');toast(m||'Teks berhasil disalin!')}catch(e){toast('Gagal menyalin teks.')}
+  a.remove();
+}
+function copyAll(){
+  const h='*BELAJAR KEREN GAME PID (15 Game Edukasi Interaktif)*\nKarya: Abdul Rahmat, S.Pd (SD Negeri 011 Balikpapan Tengah)\nNo. Telp/WA: 081351767574\n\n';
+  copyText(h+G.map((g,i)=>`${i+1}. *${g.t}*\n_${g.d}_\n${g.u}`).join('\n\n'),'Daftar 15 link game berhasil disalin!');
+}
+function toast(m){
+  const t=document.createElement('div');t.className='toast';t.textContent=m;$('toasts').appendChild(t);setTimeout(()=>t.remove(),3000);
+}
+function toggleTheme(){
+  const d=document.documentElement,dark=d.dataset.theme!=='dark';
+  d.dataset.theme=dark?'dark':'light';$('thI').className=dark?'fa-solid fa-sun':'fa-solid fa-moon';
+  try{localStorage.setItem('bk_theme',dark?'dark':'light')}catch(e){}
+  faFix();
+}
+$('yr').textContent=new Date().getFullYear();
+try{if(localStorage.getItem('bk_theme')==='dark'){document.documentElement.dataset.theme='dark';$('thI').className='fa-solid fa-sun'}}catch(e){}
+render();
+</script>
+</body>
+</html>
